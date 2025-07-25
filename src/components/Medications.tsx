@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { useToast } from '../hooks/use-toast'
 import { blink } from '../blink/client'
 import { Medication, User as UserType } from '../types'
+import { MedicationAutocomplete } from './MedicationAutocomplete'
 
 interface MedicationsProps {
   user: UserType
@@ -170,22 +171,42 @@ export default function Medications({ user }: MedicationsProps) {
             </DialogHeader>
             <div className="space-y-4">
               <div>
-                <Label htmlFor="name">Medication Name *</Label>
-                <Input
-                  id="name"
-                  value={newMedication.name}
-                  onChange={(e) => setNewMedication({ ...newMedication, name: e.target.value })}
-                  placeholder="e.g., Lisinopril"
+                <Label>Search Medication Database</Label>
+                <MedicationAutocomplete
+                  onSelect={(medication) => {
+                    setNewMedication({
+                      ...newMedication,
+                      name: medication.generic_name,
+                      dosage: medication.common_dosages.split(', ')[0] || '', // Use first common dosage
+                      notes: `${medication.drug_class} - Used for: ${medication.indication}`
+                    })
+                  }}
+                  placeholder="Search for medications..."
                 />
+                <p className="text-xs text-muted-foreground mt-1">
+                  Search our database of medications or add manually below
+                </p>
               </div>
-              <div>
-                <Label htmlFor="dosage">Dosage *</Label>
-                <Input
-                  id="dosage"
-                  value={newMedication.dosage}
-                  onChange={(e) => setNewMedication({ ...newMedication, dosage: e.target.value })}
-                  placeholder="e.g., 10mg"
-                />
+              
+              <div className="border-t pt-4">
+                <div>
+                  <Label htmlFor="name">Medication Name *</Label>
+                  <Input
+                    id="name"
+                    value={newMedication.name}
+                    onChange={(e) => setNewMedication({ ...newMedication, name: e.target.value })}
+                    placeholder="e.g., Lisinopril"
+                  />
+                </div>
+                <div className="mt-4">
+                  <Label htmlFor="dosage">Dosage *</Label>
+                  <Input
+                    id="dosage"
+                    value={newMedication.dosage}
+                    onChange={(e) => setNewMedication({ ...newMedication, dosage: e.target.value })}
+                    placeholder="e.g., 10mg"
+                  />
+                </div>
               </div>
               <div>
                 <Label htmlFor="frequency">Frequency *</Label>

@@ -11,6 +11,7 @@ import { useToast } from '../hooks/use-toast'
 import { blink } from '../blink/client'
 import { Provider, Visit, User } from '../types'
 import VisitRecording from './VisitRecording'
+import { ProviderAutocomplete } from './ProviderAutocomplete'
 
 interface ProviderPodsProps {
   user: User
@@ -149,22 +150,43 @@ export default function ProviderPods({ user }: ProviderPodsProps) {
             </DialogHeader>
             <div className="space-y-4">
               <div>
-                <Label htmlFor="name">Provider Name *</Label>
-                <Input
-                  id="name"
-                  value={newProvider.name}
-                  onChange={(e) => setNewProvider({ ...newProvider, name: e.target.value })}
-                  placeholder="Dr. Sarah Johnson"
+                <Label>Search Provider Database</Label>
+                <ProviderAutocomplete
+                  onSelect={(provider) => {
+                    setNewProvider({
+                      name: provider.name,
+                      specialty: provider.specialty + (provider.subspecialty ? ` - ${provider.subspecialty}` : ''),
+                      location: `${provider.organization}, ${provider.city}, ${provider.state}`,
+                      phone: provider.phone,
+                      email: ''
+                    })
+                  }}
+                  placeholder="Search for healthcare providers..."
                 />
+                <p className="text-xs text-muted-foreground mt-1">
+                  Search our database of healthcare providers or add manually below
+                </p>
               </div>
-              <div>
-                <Label htmlFor="specialty">Specialty *</Label>
-                <Input
-                  id="specialty"
-                  value={newProvider.specialty}
-                  onChange={(e) => setNewProvider({ ...newProvider, specialty: e.target.value })}
-                  placeholder="Cardiology"
-                />
+              
+              <div className="border-t pt-4">
+                <div>
+                  <Label htmlFor="name">Provider Name *</Label>
+                  <Input
+                    id="name"
+                    value={newProvider.name}
+                    onChange={(e) => setNewProvider({ ...newProvider, name: e.target.value })}
+                    placeholder="Dr. Sarah Johnson"
+                  />
+                </div>
+                <div className="mt-4">
+                  <Label htmlFor="specialty">Specialty *</Label>
+                  <Input
+                    id="specialty"
+                    value={newProvider.specialty}
+                    onChange={(e) => setNewProvider({ ...newProvider, specialty: e.target.value })}
+                    placeholder="Cardiology"
+                  />
+                </div>
               </div>
               <div>
                 <Label htmlFor="location">Location</Label>
