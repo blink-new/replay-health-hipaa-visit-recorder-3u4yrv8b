@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from './ui/button'
-import { Card } from './ui/card'
+import { Card, CardContent } from './ui/card'
 import { Shield, Mic, Brain, Users, Calendar, Pill } from 'lucide-react'
 
 interface LandingPageProps {
@@ -11,145 +11,133 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 flex items-center justify-center p-4">
       <div className="max-w-6xl w-full grid lg:grid-cols-2 gap-12 items-center">
-        
-        {/* Left Side - Hero Content */}
+        {/* Left Side - Content */}
         <div className="space-y-8">
           <div className="space-y-4">
-            <div className="flex items-center gap-2 text-primary">
-              <Shield className="h-6 w-6" />
-              <span className="text-sm font-medium">HIPAA Compliant</span>
+            <div className="flex items-center space-x-2">
+              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                <Mic className="w-6 h-6 text-white" />
+              </div>
+              <h1 className="text-3xl font-bold text-gray-900">Replay Health</h1>
             </div>
-            
-            <h1 className="text-5xl font-bold text-gray-900 leading-tight">
-              Replay
-              <span className="text-primary"> Health</span>
-            </h1>
-            
+            <h2 className="text-5xl font-bold text-gray-900 leading-tight">
+              Your Health Journey,
+              <span className="text-primary block">Naturally Organized</span>
+            </h2>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Record, organize, and understand your medical visits with AI-powered summaries. 
-              Keep all your healthcare information secure and accessible.
+              HIPAA-compliant app that records doctor visits, creates AI summaries, 
+              and organizes your healthcare in secure provider pods.
             </p>
           </div>
 
-          {/* Key Features */}
+          {/* Key Features Grid */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-primary/10 rounded-lg">
-                <Mic className="h-5 w-5 text-primary" />
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                <Mic className="w-4 h-4 text-green-600" />
               </div>
-              <span className="text-sm font-medium text-gray-700">Secure Recording</span>
+              <span className="text-gray-700 font-medium">Secure Recording</span>
             </div>
-            
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-accent/10 rounded-lg">
-                <Brain className="h-5 w-5 text-accent" />
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                <Brain className="w-4 h-4 text-blue-600" />
               </div>
-              <span className="text-sm font-medium text-gray-700">AI Summaries</span>
+              <span className="text-gray-700 font-medium">AI Summaries</span>
             </div>
-            
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-primary/10 rounded-lg">
-                <Users className="h-5 w-5 text-primary" />
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                <Users className="w-4 h-4 text-purple-600" />
               </div>
-              <span className="text-sm font-medium text-gray-700">Provider Pods</span>
+              <span className="text-gray-700 font-medium">Provider Pods</span>
             </div>
-            
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-accent/10 rounded-lg">
-                <Calendar className="h-5 w-5 text-accent" />
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
+                <Shield className="w-4 h-4 text-red-600" />
               </div>
-              <span className="text-sm font-medium text-gray-700">Appointments</span>
+              <span className="text-gray-700 font-medium">HIPAA Compliant</span>
             </div>
           </div>
 
-          {/* CTA Button */}
-          <Button 
-            onClick={onGetStarted}
-            size="lg"
-            className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg font-medium rounded-xl shadow-lg hover:shadow-xl transition-all duration-200"
-          >
-            Get Started
-          </Button>
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button 
+              onClick={onGetStarted}
+              size="lg" 
+              className="bg-primary hover:bg-primary/90 text-white px-8 py-3 text-lg"
+            >
+              Get Started Free
+            </Button>
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="border-primary text-primary hover:bg-primary/5 px-8 py-3 text-lg"
+            >
+              Learn More
+            </Button>
+          </div>
+
+          {/* Trust Indicators */}
+          <div className="flex items-center space-x-6 pt-4">
+            <div className="flex items-center space-x-2">
+              <Shield className="w-5 h-5 text-green-600" />
+              <span className="text-sm text-gray-600 font-medium">HIPAA Certified</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-5 h-5 bg-green-600 rounded-full flex items-center justify-center">
+                <div className="w-2 h-2 bg-white rounded-full"></div>
+              </div>
+              <span className="text-sm text-gray-600 font-medium">Bank-Level Security</span>
+            </div>
+          </div>
         </div>
 
         {/* Right Side - Visual Demo */}
         <div className="relative">
           {/* Background Image */}
           <div 
-            className="absolute inset-0 rounded-3xl bg-cover bg-center opacity-20"
+            className="w-full h-96 rounded-2xl bg-cover bg-center relative overflow-hidden"
             style={{
               backgroundImage: `url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')`
             }}
-          />
-          
-          {/* Floating Cards */}
-          <div className="relative z-10 space-y-6">
+          >
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
             
-            {/* Recording Card */}
-            <Card className="p-6 bg-white/95 backdrop-blur-sm border-0 shadow-xl">
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-red-100 rounded-full">
-                  <Mic className="h-6 w-6 text-red-600" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-900">Recording Visit</h3>
-                  <p className="text-sm text-gray-600">Dr. Sarah Johnson - Cardiology</p>
-                  <div className="flex items-center gap-2 mt-2">
-                    <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                    <span className="text-xs text-gray-500">15:32</span>
+            {/* Floating Cards */}
+            <div className="absolute inset-0 p-6 flex flex-col justify-end">
+              {/* Recording Card */}
+              <Card className="mb-4 bg-white/95 backdrop-blur-sm border-0 shadow-lg">
+                <CardContent className="p-4">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm font-medium text-gray-900">Recording Visit...</span>
+                    <span className="text-sm text-gray-500">02:34</span>
                   </div>
-                </div>
-              </div>
-            </Card>
+                </CardContent>
+              </Card>
 
-            {/* AI Summary Card */}
-            <Card className="p-6 bg-white/95 backdrop-blur-sm border-0 shadow-xl ml-8">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-green-100 rounded-full">
-                  <Brain className="h-6 w-6 text-green-600" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-gray-900">AI Summary Ready</h3>
-                  <div className="mt-3 space-y-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span className="text-sm text-gray-700">Blood pressure stable</span>
+              {/* AI Summary Card */}
+              <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-lg">
+                <CardContent className="p-4">
+                  <div className="flex items-center space-x-2 mb-2">
+                    <Brain className="w-4 h-4 text-blue-600" />
+                    <span className="text-sm font-medium text-gray-900">AI Summary Ready</span>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="flex items-center space-x-2">
+                      <Pill className="w-3 h-3 text-green-600" />
+                      <span className="text-xs text-gray-600">2 medications discussed</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Pill className="h-4 w-4 text-blue-600" />
-                      <span className="text-sm text-gray-700">Continue Lisinopril 10mg</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Calendar className="h-4 w-4 text-purple-600" />
-                      <span className="text-sm text-gray-700">Follow-up in 3 months</span>
+                    <div className="flex items-center space-x-2">
+                      <Calendar className="w-3 h-3 text-blue-600" />
+                      <span className="text-xs text-gray-600">Follow-up in 2 weeks</span>
                     </div>
                   </div>
-                </div>
-              </div>
-            </Card>
-
-            {/* Provider Pod Card */}
-            <Card className="p-6 bg-white/95 backdrop-blur-sm border-0 shadow-xl">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-blue-100 rounded-full">
-                    <Users className="h-6 w-6 text-blue-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">Provider Pods</h3>
-                    <p className="text-sm text-gray-600">3 providers, 12 visits</p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="text-2xl font-bold text-primary">12</div>
-                  <div className="text-xs text-gray-500">Total Visits</div>
-                </div>
-              </div>
-            </Card>
-
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
-
       </div>
     </div>
   )
